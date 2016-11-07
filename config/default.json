@@ -1,0 +1,11 @@
+{
+    "sqlConfig": {
+        "server": "myserver",
+        "database": "mydb",
+        "user": "dbuser",
+        "password": "***",
+        "options": {
+            "encrypt": true
+        }
+    }
+}
