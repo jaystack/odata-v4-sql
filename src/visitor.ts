@@ -46,6 +46,7 @@ export class Visitor{
 
 	constructor(options = <SqlOptions>{}){
 		this.options = options;
+		if (this.options.useParameters != false) this.options.useParameters = true;
 		this.type = options.type || SQLLang.ANSI;
 	}
 
@@ -58,14 +59,15 @@ export class Visitor{
 					if (typeof this.skip != "number") sql += " OFFSET 0 ROWS";
 					sql += ` FETCH NEXT ${this.limit} ROWS ONLY`;
 				}
-				return sql;
+				break;
 			case SQLLang.MySql:
 			case SQLLang.PostgreSql:
 			default:
 				if (typeof this.limit == "number") sql += ` LIMIT ${this.limit}`;
 				if (typeof this.skip == "number") sql += ` OFFSET ${this.skip}`;
-				return sql;
+				break;
 		}
+		return sql;
 	}
 
 	asMsSql(){

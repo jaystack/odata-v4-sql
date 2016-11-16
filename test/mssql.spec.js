@@ -1,4 +1,4 @@
-var createFilter = require('../build/lib').createFilter
+var createFilter = require('../lib').createFilter
 var expect = require('chai').expect
 
 describe("SQL WHERE useParameters (MS-SQL)", () => {

@@ -1,4 +1,4 @@
-var createQuery = require('../build/lib').createQuery
+var createQuery = require('../lib').createQuery
 var expect = require('chai').expect
 
 describe("SQL SELECT", () => {
@@ -54,7 +54,9 @@ describe("OData $expand", () => {
   beforeEach(function() {
     var match;
      if (match = this.currentTest.title.match(/expression[^\:]*\:  ?(.*)/)) {
-       f = createQuery(match[1]);
+       f = createQuery(match[1], {
+           useParameters: false
+       });
      }
   });
 

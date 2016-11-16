@@ -2,8 +2,8 @@
   "name": "odata-v4-sql",
   "version": "0.1.0",
   "description": "OData to SQL query compiler",
-  "main": "build/lib/index.js",
-  "typings": "build/lib/index",
+  "main": "lib/index.js",
+  "typings": "lib/index",
   "directories": {
     "test": "test"
   },
@@ -34,13 +34,8 @@
     "odata-v4-parser": "0.1.13"
   },
   "devDependencies": {
-    "@types/config": "^0.0.30",
-    "@types/mssql": "^3.1.29",
     "chai": "^3.5.0",
-    "config": "^1.21.0",
     "mocha": "^3.1.2",
-    "mssql": "^3.3.0",
-    "odata-v4-server": "rc",
     "typescript": "^2.0.6"
   }
 }

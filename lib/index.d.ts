@@ -14,7 +14,9 @@ export interface SqlOptions {
  * let sqlQuery = `SELECT * FROM table WHERE ${filter.where}`;
  */
 export declare function createQuery(odataQuery: string, options?: SqlOptions): Visitor;
+export declare function createQuery(odataQuery: string, options?: SqlOptions, type?: SQLLang): Visitor;
 export declare function createQuery(odataQuery: Token, options?: SqlOptions): Visitor;
+export declare function createQuery(odataQuery: Token, options?: SqlOptions, type?: SQLLang): Visitor;
 /**
  * Creates an SQL WHERE clause from an OData filter expression string
  * @param {string} odataFilter - A filter expression in OData $filter format
@@ -24,4 +26,6 @@ export declare function createQuery(odataQuery: Token, options?: SqlOptions): Vi
  * let sqlQuery = `SELECT * FROM table WHERE ${filter}`;
  */
 export declare function createFilter(odataFilter: string, options?: SqlOptions): Visitor;
+export declare function createFilter(odataFilter: string, options?: SqlOptions, type?: SQLLang): Visitor;
 export declare function createFilter(odataFilter: Token, options?: SqlOptions): Visitor;
+export declare function createFilter(odataFilter: Token, options?: SqlOptions, type?: SQLLang): Visitor;

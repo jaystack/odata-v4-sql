@@ -1,4 +1,4 @@
-var createFilter = require('../build/lib').createFilter
+var createFilter = require('../lib').createFilter
 var expect = require('chai').expect
 
 describe("SQL WHERE", () => {
@@ -6,7 +6,9 @@ describe("SQL WHERE", () => {
   beforeEach(function() {
     var match;
      if (match = this.currentTest.title.match(/expression[^\:]*\:  ?(.*)/)) {
-       f = createFilter(match[1]).where;
+       f = createFilter(match[1], {
+           useParameters: false
+       }).where;
      }
   });
 
