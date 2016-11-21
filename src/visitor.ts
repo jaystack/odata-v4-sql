@@ -29,7 +29,7 @@ export enum SQLLang{
 }
 
 export class Visitor{
-	private options:SqlOptions
+	protected options:SqlOptions
 	type:SQLLang;
 	select:string = "";
 	where:string = "";
@@ -39,9 +39,9 @@ export class Visitor{
 	inlinecount:boolean
 	navigationProperty:string
 	includes:Visitor[] = [];
-	parameters:Map<string, any> = new Map();
-	private parameterSeed:number = 0;
-	private originalWhere:string;
+	parameters:any = new Map();
+	protected parameterSeed:number = 0;
+	protected originalWhere:string;
 	ast:Token
 
 	constructor(options = <SqlOptions>{}){

@@ -17,7 +17,7 @@ export declare enum SQLLang {
     PostgreSql = 3,
 }
 export declare class Visitor {
-    private options;
+    protected options: SqlOptions;
     type: SQLLang;
     select: string;
     where: string;
@@ -27,9 +27,9 @@ export declare class Visitor {
     inlinecount: boolean;
     navigationProperty: string;
     includes: Visitor[];
-    parameters: Map<string, any>;
-    private parameterSeed;
-    private originalWhere;
+    parameters: any;
+    protected parameterSeed: number;
+    protected originalWhere: string;
     ast: Token;
     constructor(options?: SqlOptions);
     from(table: string): string;
