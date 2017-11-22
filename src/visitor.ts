@@ -350,7 +350,7 @@ export class Visitor{
 				this.Visit(params[0], context);
 				this.where += ', ';
 				this.Visit(params[1], context);
-				this.where += ")";
+				this.where += ") - 1";
 				break;
 			case "round":
 				this.where += "ROUND(";

@@ -104,7 +104,7 @@ describe("SQL WHERE useParameters", () => {
   })
 
   it("expression 5.1.1.4.5: indexof(A, 'BC') eq 1", () => {
-      expect(f.where).to.equal("INSTR([A], ?) = ?")
+      expect(f.where).to.equal("INSTR([A], ?) - 1 = ?")
   })
 
   it("expression 5.1.1.4.7: tolower(A) eq 'abc'", () => {

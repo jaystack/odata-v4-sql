@@ -112,7 +112,7 @@ describe("SQL WHERE", () => {
   })
 
   it("expression 5.1.1.4.5: indexof(A, 'BC') eq 1", () => {
-    expect(f).to.equal("INSTR([A], 'BC') = 1")
+    expect(f).to.equal("INSTR([A], 'BC') - 1 = 1")
 })
 
   it("expression 5.1.1.4.7: tolower(A) eq 'abc'", () => {
