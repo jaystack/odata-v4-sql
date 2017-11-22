@@ -4,7 +4,7 @@ import { SqlOptions } from "./index";
 
 export class SQLLiteral extends Literal{
 	static convert(type:string, value:string):any {
-        return (new SQLLiteral(type, value)).valueOf(); 
+        return (new SQLLiteral(type, value)).valueOf();
     }
 	'Edm.String'(value:string){ return "'" + decodeURIComponent(value).slice(1, -1).replace(/''/g, "'") + "'"; }
 	'Edm.Guid'(value:string){ return "'" + decodeURIComponent(value) + "'"; }
@@ -327,6 +327,30 @@ export class Visitor{
 					this.parameters.set(name, `${value}%`);
 					this.where += " like ?";
 				}else this.where += ` like '${SQLLiteral.convert(params[1].value, params[1].raw).slice(1, -1)}%'`;
+				break;
+			case "indexof":
+				let fn = "";
+				switch (this.type) {
+					case SQLLang.MsSql:
+						fn = "CHARINDEX";
+						break;
+					case SQLLang.ANSI:
+					case SQLLang.MySql:
+					case SQLLang.PostgreSql:
+					default:
+						fn = "INSTR";
+						break;
+				}
+				if (fn === "CHARINDEX"){
+					const tmp = params[0];
+					params[0] = params[1];
+					params[1] = tmp;
+				}
+				this.where += `${fn}(`;
+				this.Visit(params[0], context);
+				this.where += ', ';
+				this.Visit(params[1], context);
+				this.where += ")";
 				break;
 			case "round":
 				this.where += "ROUND(";
