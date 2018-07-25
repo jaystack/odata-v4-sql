@@ -104,6 +104,10 @@ describe("SQL WHERE useParameters (MS-SQL)", () => {
       expect(f.where).to.equal("LEN([A]) = @p0")
   })
 
+  it("expression 5.1.1.4.5: indexof(A, 'BC') eq 1", () => {
+    expect(f.where).to.equal("CHARINDEX(@p0, [A]) - 1 = @p1")
+  })
+
   it("expression 5.1.1.4.7: tolower(A) eq 'abc'", () => {
       expect(f.where).to.equal("LCASE([A]) = @p0")
   })
