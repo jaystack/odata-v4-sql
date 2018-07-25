@@ -15,6 +15,7 @@ export declare enum SQLLang {
     MsSql = 1,
     MySql = 2,
     PostgreSql = 3,
+    Oracle = 4
 }
 export declare class Visitor {
     protected options: SqlOptions;
@@ -34,6 +35,7 @@ export declare class Visitor {
     constructor(options?: SqlOptions);
     from(table: string): string;
     asMsSql(): this;
+    asOracleSql(): this;
     asAnsiSql(): this;
     asType(): this;
     Visit(node: Token, context?: any): this;

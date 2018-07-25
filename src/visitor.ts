@@ -25,7 +25,8 @@ export enum SQLLang{
 	ANSI,
 	MsSql,
 	MySql,
-	PostgreSql
+	PostgreSql,
+	Oracle
 }
 
 export class Visitor{
@@ -53,6 +54,7 @@ export class Visitor{
 	from(table:string){
 		let sql = `SELECT ${this.select} FROM [${table}] WHERE ${this.where} ORDER BY ${this.orderby}`;
 		switch (this.type){
+      case SQLLang.Oracle:
 			case SQLLang.MsSql:
 				if (typeof this.skip == "number") sql += ` OFFSET ${this.skip} ROWS`;
 				if (typeof this.limit == "number"){
@@ -80,6 +82,16 @@ export class Visitor{
 		return this;
 	}
 
+  asOracleSql(){
+    this.type = SQLLang.Oracle;
+    let rx = new RegExp("\\?", "g");
+    let keys = this.parameters.keys();
+    this.originalWhere = this.where;
+    this.where = this.where.replace(rx, () => `:${keys.next().value}`);
+    this.includes.forEach((item) => item.asOracleSql());
+    return this;
+  }
+
 	asAnsiSql(){
 		this.type = SQLLang.ANSI;
 		this.where = this.originalWhere || this.where;
@@ -93,6 +105,7 @@ export class Visitor{
 			case SQLLang.ANSI:
 			case SQLLang.MySql:
 			case SQLLang.PostgreSql: return this.asAnsiSql();
+			case SQLLang.Oracle: return this.asOracleSql();
 			default: return this;
 		}
 	}
