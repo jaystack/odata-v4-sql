@@ -376,12 +376,12 @@ export class Visitor{
 				this.where += ")";
 				break;
 			case "tolower":
-				this.where += "LCASE(";
+				this.where += this.type === SQLLang.MsSql ? "LOWER(" : "LCASE(";
 				this.Visit(params[0], context);
 				this.where += ")";
 				break;
 			case "toupper":
-				this.where += "UCASE(";
+				this.where += this.type === SQLLang.MsSql ? "UPPER(" :"UCASE(";
 				this.Visit(params[0], context);
 				this.where += ")";
 				break;
