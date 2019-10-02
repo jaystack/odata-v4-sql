@@ -109,11 +109,11 @@ describe("SQL WHERE useParameters (MS-SQL)", () => {
   })
 
   it("expression 5.1.1.4.7: tolower(A) eq 'abc'", () => {
-      expect(f.where).to.equal("LCASE([A]) = @p0")
+      expect(f.where).to.equal("LOWER([A]) = @p0")
   })
 
   it("expression 5.1.1.4.8: toupper(A) eq 'ABC'", () => {
-      expect(f.where).to.equal("UCASE([A]) = @p0")
+      expect(f.where).to.equal("UPPER([A]) = @p0")
   })
 
   it("expression 5.1.1.4.9: trim(A) eq 'abc'", () => {
